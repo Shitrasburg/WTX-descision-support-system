@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<div id="container" style="height: 400px"></div>
+
+<script>
+csv_data = []
+d3.csv("data.csv").then(function(data) {
+  console.log(data[0]);
+  csv_data = data;
+});
+
+Highcharts.chart('container', {
+  chart: {
+    type: 'pie',
+    options3d: {
+      enabled: true,
+      alpha: 45
+    }
+  },
+  title: {
+    text: 'Annual trading volume chart of futures commodities'
+  },
+  subtitle: {
+    text: '單位：口'
+  },
+  plotOptions: {
+    pie: {
+      innerSize: 100,
+      depth: 45
+    }
+  },
+  series: [{
+    name: 'Delivered amount',
+    data: [
+      ['臺股期貨（TX ）46,946,307', 15],
+      ['小型臺指（MTX）37268930', 12],
+      ['臺灣50期貨（T5F ）12,052',1],
+      ['電子期貨（TE ）992,544', 1],
+      ['金融期貨（TF ）539,434', 1],
+      ['櫃買期貨（GTF ）7881', 1],
+      ['股票期貨（STF ）22,812,494', 7],
+      ['ETF期貨（ETF ）1,520,673', 1],
+      ['東證期貨（TJF ）88,285', 1],
+      ['印度50期貨 （I5F ）72,218', 1],
+      ['美國標普500期貨（SPF ）125444', 1],
+      ['美國道瓊期貨（UDF ）1,466,111', 1],
+      ['黃金期貨（GDF ）20396', 1],
+      ['臺幣黃金期貨（TGF ）110,513', 1],
+      ['美國道瓊期貨（UDF ）1,466,111', 1],
+      ['美元兌人民幣期貨（RHF ）66,743', 1],
+      ['小型美元兌人民幣期貨（RTF ）283451', 1],
+      ['美元兌日圓期貨 （XJF ）1,466,111', 1], 
+      ['歐元兌美元期貨 （XEF ）77,987', 1], 
+      ['英鎊兌美元期貨（XBF ）75468', 1], 
+      ['澳幣兌美元期貨（XAF ）49,032', 1], 
+      
+    ]
+  }]
+});
+
+
+
+</script>
+<style>
+body{background-color: #A7CA60;}
+h1{display:block;
+  font-size:60px;
+  margin-left:300px;
+  color: #FF0000;}
+
+</style>
+<body >
+<div>
+<img style="margin-left:100px"; src="table.jpg"  width="80%" >
+
+<h1>高槓桿、高獲利、低成本</h1>
+</div>
+<a href="index.html"><img src="back.png" width="200" height="100"></a>
+</body>
+</html>

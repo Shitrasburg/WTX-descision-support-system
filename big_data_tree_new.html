@@ -1,0 +1,136 @@
+﻿<html>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/networkgraph.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<div id="container"></div>
+
+<script>
+Highcharts.addEvent(
+  Highcharts.seriesTypes.networkgraph,
+  'afterSetOptions',
+  function (e) {
+    var colors = Highcharts.getOptions().colors,
+      i = 0,
+      nodes = {};
+    e.options.data.forEach(function (link) {
+
+      if (link[0] === 'Big Data') {
+        nodes['Big Data'] = {
+          id: 'Big Data',
+          marker: {
+            radius: 20
+          }
+        };
+        nodes[link[1]] = {
+          id: link[1],
+          marker: {
+            radius: 10
+          },
+          color: colors[i++]
+        };
+      } else if (nodes[link[0]] && nodes[link[0]].color) {
+        nodes[link[1]] = {
+          id: link[1],
+          color: nodes[link[0]].color
+        };
+      }
+    });
+
+    e.options.nodes = Object.keys(nodes).map(function (id) {
+      return nodes[id];
+    });
+  }
+);
+
+Highcharts.chart('container', {
+  chart: {
+    type: 'networkgraph',
+    height: '60%'
+  },
+  title: {
+    text: 'The Big Data Tree'
+  },
+
+  plotOptions: {
+    networkgraph: {
+      keys: ['from', 'to'],
+      layoutAlgorithm: {
+        enableSimulation: true,
+        friction: -0.9
+      }
+    }
+  },
+  series: [{
+    dataLabels: {
+      enabled: true,
+      linkFormat: ''
+    },
+    data: [
+	  ['Big Data', 'OS'],
+      ['Big Data', 'Programming'],
+	  ['Big Data', 'Mathematics'],
+      ['Big Data', 'Database'],
+	  ['Big Data', '機器學習'],
+      ['Big Data', 'Visualization'],
+	  ['Mathematics', '統計應用實務'],
+	  ['OS', 'Windows'],
+      ['OS', 'Mac'],
+      ['OS', 'Linux'],
+	  //leaves
+	  ['Programming', 'Java'],
+      ['Programming', 'Python'],
+      ['Programming', '啟動及設計Jupyter Server'],
+	  ['Python', '數據擷取與分析XML'],
+      ['Database', 'SQL關聯式資料庫系統'],
+	  ['Database', 'NoSQL非關聯式資料庫系統'],
+      ['Database', 'Hadoop分散檔案系統'],
+	  ['Database', '數據儲存與管理Hbase'],
+	  ['Database', 'Spark分散式資料分析框架'],
+	  ['Hadoop分散檔案系統', 'Hadoop MapReduce'],
+      ['Hadoop分散檔案系統', 'HDFS 分散式儲存系統'],
+      ['Hadoop分散檔案系統', 'YARN 分散運算系統'],
+      ['Hadoop分散檔案系統', 'Hadoop Common'],
+	  ['機器學習', '分類'],
+      ['機器學習', '維度減少法'],
+	  ['機器學習', '分群'],
+	  ['機器學習', '關聯'],
+	  ['分類', '決策樹C4.5/C5.0'],
+	  ['分類', '隨機森林'],
+	  ['分類', '類神經網路'],
+	  ['分類', '支持向量機'],
+	  ['維度減少法', '主成份分析法'],
+	  ['維度減少法', '線性判別分析法'],	
+	  ['維度減少法', '因素分析'],	  
+	  ['維度減少法', '遺傳演算法'],
+	  ['維度減少法', '資訊獲利屬性分析'],
+	  ['分群','K-mean'],
+	  ['分群','自我映射網路'],
+	  ['關聯', 'Apriori'],
+      ['關聯', 'Text Mining'],
+	  ['Visualization', 'Python語言數據視覺化'],
+	  ['Visualization', 'web'],
+	  ['Python語言數據視覺化', '常用屬性或方法'],
+	  ['Python語言數據視覺化', '資料結構'],
+	  ['Python語言數據視覺化', '載入資料'],
+	  ['Python語言數據視覺化', '網頁爬蟲'],
+	  ['Python語言數據視覺化', '資料彙整'],	  
+	  ['Python語言數據視覺化', '數據視覺化Matplotlib'],
+	  ['Python語言數據視覺化', '數據視覺化Seaborn'],
+	  ['Python語言數據視覺化', '數據視覺化Bokeh'],	  
+	  ['Python語言數據視覺化', '線性迴歸/邏輯迴歸'],
+	  ['web', 'HTML'],
+	  ['web', 'CSS'],
+	  ['web', 'JavaScript']
+    ]
+  }]
+});
+</script>
+
+<body>
+<img src="Architecture.jpg" border="0">
+<a href="index.html"><img src="back.png" width="100" height="50"></a>
+</body>
+
+
+</html>
